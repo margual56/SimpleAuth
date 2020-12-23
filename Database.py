@@ -18,9 +18,12 @@ class DatabaseWrapper:
 
         print("Successfully closed connection to database!")
 
-    def newUser(self, username: str, passwd: str):
-        query = "INSERT INTO users (username, password) VALUES ( %s, crypt(%s, gen_salt('bf')) )"
-        data = (username, passwd)
+    def newUser(self, username: str, passwd: str, isAdmin=False, admin_passwd=""):
+        if isAdmin and not self.checkUser('admin_key', admin_passwd):
+            return False
+
+        query = "INSERT INTO users (username, password, isAdmin) VALUES ( %s, crypt(%s, gen_salt('bf')), %s )"
+        data = (username, passwd, str(isAdmin).lower())
 
         self.cursor.execute(query, data)
         self.conn.commit()
@@ -124,20 +127,11 @@ class DatabaseWrapper:
             self.cursor.execute('create extension pgcrypto')
             self.conn.commit()
 
-            print("Creating the game binaries' table...")
-
-            # Create the table to store the game binaries' information
-            self.cursor.execute('CREATE TABLE game_bin (version VARCHAR(5) PRIMARY KEY, release_date TIMESTAMP, ' +
-                                'description VARCHAR(255), file_location VARCHAR(200))')
-
-            # Execute the changes
-            self.conn.commit()
-
             print("Creating users' table...")
 
             # Create the table to store the data for the users
-            self.cursor.execute('create table users (id int generated always as identity(cache 10 ) primary key' +
-                                ', username text not null unique, password text not null)')
+            self.cursor.execute(
+                'create table users (username text primary key, password text not null, isAdmin boolean DEFAULT FALSE)')
 
             # Execute the changes
             self.conn.commit()

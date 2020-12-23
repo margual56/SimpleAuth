@@ -1,5 +1,4 @@
 import atexit
-import signal
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 from Database import DatabaseWrapper
 import os
@@ -44,18 +43,16 @@ def logout():
 def newuser():
     if request.method == "POST":
         if request.form['password1'] == request.form['password2']:
-            if not db.verifyAdmin(request.form['passwd_admin']):
-                return redirect(url_for('impostor'))
-
             if db.userExists(request.form['username']):
                 flash("User exists")
                 return redirect(url_for('login'))
 
             db.newUser(request.form['username'], request.form['password1'])
 
-            return redirect(url_for('home'))
+            return redirect(url_for('login'))
         else:
-            return "wrong password"
+            flash("User exists")
+            return redirect(url_for('newuser'))
     else:
         return render_template('newuser.html')
 

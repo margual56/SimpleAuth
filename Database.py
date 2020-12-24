@@ -19,7 +19,7 @@ class DatabaseWrapper:
         print("Successfully closed connection to database!")
 
     def newUser(self, username: str, passwd: str, isAdmin=False, admin_passwd=""):
-        if isAdmin and not self.checkUser('admin_key', admin_passwd):
+        if isAdmin and not self.verifyAdmin(admin_passwd):
             return False
 
         query = "INSERT INTO users (username, password, isAdmin) VALUES ( %s, crypt(%s, gen_salt('bf')), %s )"

@@ -24,7 +24,6 @@ class DatabaseWrapper:
 
         query = "INSERT INTO users (username, password, isAdmin) VALUES ( %s, crypt(%s, gen_salt('bf')), %s )"
         saltedPasswd = username[:len(username) // 2] + passwd + username[len(username) // 2:]
-        print(saltedPasswd)
         data = (username, saltedPasswd, str(isAdmin).lower())
 
         self.cursor.execute(query, data)
@@ -35,7 +34,6 @@ class DatabaseWrapper:
     def checkUser(self, username: str, passwd: str):
         query = "SELECT (password=crypt(%s, password)) AS pwd_match from users where username = %s"
         saltedPasswd = username[:len(username) // 2] + passwd + username[len(username) // 2:]
-        print(saltedPasswd)
         data = (saltedPasswd, username)
 
         self.cursor.execute(query, data)

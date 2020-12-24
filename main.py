@@ -22,12 +22,9 @@ def login(incorrect=False):
         correct = db.checkUser(request.form['username'], request.form['password'])
 
         if correct:
-            print("login successful")
             session['logged_in'] = True
             session['username'] = request.form['username']
             return redirect('/')
-        
-        print("login incorrect")
 
         return render_template('login.html', incorrect=True)
     else:

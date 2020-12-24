@@ -19,4 +19,8 @@
 {% block body %}
     <a class="btn nologin" href="/logout">Log out</a>
     <img class="cat-gif" src="https://memesbams.com/wp-content/uploads/2017/11/Happy-Cat-Gif.gif" alt="cat" style="width:480px;min-height:480px;">
+    {% if isAdmin %}
+        <h2>You are a system administrator!</h2>
+    {% endif %}
+
 {% endblock %}

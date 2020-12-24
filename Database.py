@@ -23,14 +23,16 @@ class DatabaseWrapper:
             return False
 
         query = "INSERT INTO users (username, password, isAdmin) VALUES ( %s, crypt(%s, gen_salt('bf')), %s )"
-        data = (username, passwd, str(isAdmin).lower())
+        saltedPasswd = username[:len(username) // 2] + passwd + username[len(username) // 2:]
+        data = (username, saltedPasswd, str(isAdmin).lower())
 
         self.cursor.execute(query, data)
         self.conn.commit()
 
     def checkUser(self, username: str, passwd: str):
         query = "SELECT (password=crypt(%s, password)) AS pwd_match from users where username = %s"
-        data = (passwd, username)
+        saltedPasswd = username[:len(username) // 2] + passwd + username[len(username) // 2:]
+        data = (saltedPasswd, username)
 
         self.cursor.execute(query, data)
 
@@ -40,6 +42,19 @@ class DatabaseWrapper:
             return False
         else:
             return res[0]
+
+    def isAdmin(self, username: str):
+        query = "SELECT isadmin from users where username = %s"
+        data = (username,)
+
+        self.cursor.execute(query, data)
+
+        res = self.cursor.fetchone()
+
+        if res is None or not bool(res):
+            return False
+        else:
+            return bool(res)
 
     def userExists(self, username: str):
         query = "SELECT username from users where username = %s"

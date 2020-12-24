@@ -1,0 +1,38 @@
+<title>Trabajo Teoría parte 2</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+
+{% block body %}
+<div  class="container">
+    {% if session['logged_in'] %}
+        You're logged in already!
+    {% else %}
+    <form  action="index.html" method="post">
+        <div class="login">
+            <div class="login-screen">
+                <div class="app-title">
+                    <h1 style="color: white">Login</h1>
+                </div>
+                <div class="login-form">
+                    <div class="control-group">
+                        <label class="login-field-icon fui-user" for ="username"> Username </label>
+                        <input class ="login-field" value="" placeholder="username" type ="text" id="username" name="username" required>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="password"> Password </label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    {% if incorrect %}
+                        <div class="error">The username or password was incorrect</div>
+                        <br/>
+                    {% endif %}
+
+                    <input type ="submit" value ="Submit">
+                </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

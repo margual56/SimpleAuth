@@ -51,10 +51,9 @@ class DatabaseWrapper:
 
         res = self.cursor.fetchone()
 
-        if res is None or not bool(res):
-            return False
-        else:
-            return bool(res)
+        print(res[0])
+
+        return res[0]
 
     def userExists(self, username: str):
         query = "SELECT username from users where username = %s"

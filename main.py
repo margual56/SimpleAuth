@@ -42,13 +42,11 @@ def logout():
 @app.route("/newuser", methods=['POST', 'GET'])
 def newuser():
     if request.method == "POST":
-        print(bool(request.form.getlist('IsAdmin')))
-
         if db.userExists(request.form['username']):
             flash("User exists")
             return redirect(url_for('login'))
 
-        if request.form['IsAdmin']:
+        if bool(request.form.getlist('IsAdmin')):
             db.newUser(request.form['username'], request.form['password'], True, request.form['passwordadmin'])
         else:
             db.newUser(request.form['username'], request.form['password'])

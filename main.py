@@ -39,7 +39,7 @@ def logout():
     return home()
 
 
-@app.route("/newaccount", methods=['POST', 'GET'])
+@app.route("/newuser", methods=['POST', 'GET'])
 def newuser():
     if request.method == "POST":
         if request.form['password1'] == request.form['password2']:

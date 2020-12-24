@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>New user</title>
-    <link rel="stylesheet" href="../static/style.css" type="text/css">
-    <script type="text/javascript" src="../static/functions.js"></script>
-  </head>
-  <body>
+<meta charset="utf-8">
+<title>New user</title>
+<link rel="stylesheet" href="../static/style.css" type="text/css">
+<script type="text/javascript" src="../static/functions.js"></script>
+
+{% block body %}
     <div  class="container">
       <form  action="index.html" method="post">
         <div class="login">
@@ -46,5 +43,4 @@
         </div>
       </form>
     </div>
-  </body>
-</html>
+{% endbody %}

@@ -6,28 +6,29 @@
     <link rel="stylesheet" href="../static/style.css" type="text/css">
   </head>
   <body>
+    <a class="btn nologin" href="/newuser">New account</a>
     <div  class="container">
-    <form  action="index.html" method="post">
-      <div class="login">
-        <div class="login-screen">
+      <form  action="index.html" method="post">
+        <div class="login">
+          <div class="login-screen">
             <div class="app-title">
-                <h1 style="color: white">Login</h1>
+              <h1 style="color: white">Login</h1>
             </div>
             <div class="login-form">
-                <div class="control-group">
-      <label class="login-field-icon fui-user" for ="username"> Username </label>
-      <input class ="login-field" value="" placeholder="username" type ="text" id="username" name="username" required>
-    </div>
-                    <div class="control-group">
-
-      <label for="password"> Password </label>
-      <input type="password" id="password" name="password" required>
-      </div>
-      <input type ="submit" value ="Submit">
-    </div>
-    </div>
-
-    </form>
+              <div class="control-group">
+                <label for ="username"> Username </label>
+                <input class ="login-field" value="" placeholder="username" type ="text" id="username" name="username" required>
+              </div>
+              <div class="control-group">
+                <label for="password"> Password </label>
+                <input class ="login-field" value="" placeholder="password" type="password" id="password" name="password" required>
+              </div>
+              <br/>
+              <input class="btn" type ="submit" value ="Submit">
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </body>
 </html>

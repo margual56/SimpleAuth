@@ -15,6 +15,10 @@
               <h1 style="color: white">Login</h1>
             </div>
 
+            {% if incorrect %}
+            <h6 style="color: red">Something was wrong</h6>
+            {% endif %}
+
             <div class="login-form">
               <div class="control-group">
                 <label for ="username"> Username </label>

@@ -52,13 +52,14 @@ def newuser():
             return redirect(url_for('login'))
 
         if bool(request.form.getlist('IsAdmin')):
-            db.newUser(request.form['username'], request.form['password'], True, request.form['passwordadmin'])
+            if not db.newUser(request.form['username'], request.form['password'], True, request.form['passwordadmin']):
+                return render_template('newuser.html', incorrect=True)
         else:
             db.newUser(request.form['username'], request.form['password'])
 
         return redirect(url_for('login'))
     else:
-        return render_template('newuser.html')
+        return render_template('newuser.html', incorrect=False)
 
 
 # @app.route('/favicon.ico')

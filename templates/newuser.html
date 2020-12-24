@@ -23,6 +23,10 @@
 
               <br/>
 
+              {% if incorrect %}
+              <h6 style="color: red">Admin password was wrong</h6><br/>
+              {% endif %}
+
               <div class="control-group">
                 <label for="IsAdmin"> Is administrator?</label>
                 <input type="checkbox" onclick="myFunction()" id="IsAdmin" name="IsAdmin" value="IsAdmin">

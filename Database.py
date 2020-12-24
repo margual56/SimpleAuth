@@ -29,6 +29,8 @@ class DatabaseWrapper:
         self.cursor.execute(query, data)
         self.conn.commit()
 
+        return True
+
     def checkUser(self, username: str, passwd: str):
         query = "SELECT (password=crypt(%s, gen_salt('bf'))) AS pwd_match from users where username = %s"
         saltedPasswd = username[:len(username) // 2] + passwd + username[len(username) // 2:]

@@ -30,7 +30,7 @@ class DatabaseWrapper:
         self.conn.commit()
 
     def checkUser(self, username: str, passwd: str):
-        query = "SELECT (password=crypt(%s, password)) AS pwd_match from users where username = %s"
+        query = "SELECT (password=crypt(%s, gen_salt('bf'))) AS pwd_match from users where username = %s"
         saltedPasswd = username[:len(username) // 2] + passwd + username[len(username) // 2:]
         data = (saltedPasswd, username)
 
@@ -50,8 +50,6 @@ class DatabaseWrapper:
         self.cursor.execute(query, data)
 
         res = self.cursor.fetchone()
-
-        print(res[0])
 
         return res[0]
 

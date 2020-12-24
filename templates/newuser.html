@@ -2,12 +2,15 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Trabajo Teoría parte 2</title>
+    <title>AÑADIR NUEVO USUARIO</title>
     <link rel="stylesheet" href="../static/style.css" type="text/css">
+    <script type="text/javascript" src="../static/functions.js">
+
+    </script>
   </head>
   <body>
     <div  class="container">
-    <form  action="index.html" method="post">
+    <form  action="newuser.html" method="post">
       <div class="login">
         <div class="login-screen">
             <div class="app-title">
@@ -17,17 +20,25 @@
                 <div class="control-group">
       <label class="login-field-icon fui-user" for ="username"> Username </label>
       <input class ="login-field" value="" placeholder="username" type ="text" id="username" name="username" required>
+
     </div>
                     <div class="control-group">
 
       <label for="password"> Password </label>
       <input type="password" id="password" name="password" required>
       </div>
-      <input type ="submit" value ="Submit">
+      <div class="admin">
+        <input type="checkbox" onclick="myFunction()" id="Administrador" name="Administrador" value="Administrador">
+        <label for="Administrador"> Administrador</label><br>
+        <label for="password admin"> Password </label>
+        <input type="password" style="display:none" id="passwordadmin" admin name="password admin" required>
+      </div>
+      <input type ="submit" value ="ADD NEW USER" class="btn">
     </div>
     </div>
 
     </form>
     </div>
+
   </body>
 </html>

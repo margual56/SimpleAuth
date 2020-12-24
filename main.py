@@ -9,7 +9,7 @@ db = None
 
 
 @app.route('/')
-def home(isAdmin=False):
+def home():
     if session.get('logged_in'):
         return render_template('controlpanel.html', isAdmin=db.isAdmin(session.get('username')))
     else:
@@ -22,16 +22,19 @@ def login(incorrect=False):
         correct = db.checkUser(request.form['username'], request.form['password'])
 
         if correct:
+            print("login successful")
             session['logged_in'] = True
             session['username'] = request.form['username']
-            return redirect(url_for('home'))
+            return redirect('/')
+        
+        print("login incorrect")
 
         return render_template('login.html', incorrect=True)
     else:
         if session.get('logged_in'):
             return home()
         else:
-            return render_template('login.html', incorrect=False)
+            return render_template('login.html', incorrect=incorrect)
 
 
 @app.route("/logout")
